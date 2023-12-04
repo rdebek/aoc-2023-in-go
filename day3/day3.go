@@ -8,9 +8,9 @@ import (
 )
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
 func isDigit(character string) bool {
@@ -26,15 +26,14 @@ func isSymbol(character string) bool {
 func checkVerticalRow(aboveRow []string, startIndexX int, indexY int, alreadyVisitedCells [500][500]bool) ([]string, [500][500]bool) {
 	var numbers = make([]string, 0)
 	var wholeNumber string
-	for i, character := range aboveRow[startIndexX: startIndexX + 3] {
-		if isDigit(character) && alreadyVisitedCells[indexY][startIndexX + i] != true {
-			wholeNumber, alreadyVisitedCells = getNumber(aboveRow, startIndexX + i, indexY, alreadyVisitedCells)
+	for i, character := range aboveRow[startIndexX : startIndexX+3] {
+		if isDigit(character) && alreadyVisitedCells[indexY][startIndexX+i] != true {
+			wholeNumber, alreadyVisitedCells = getNumber(aboveRow, startIndexX+i, indexY, alreadyVisitedCells)
 			numbers = append(numbers, wholeNumber)
 		}
 	}
 	return numbers, alreadyVisitedCells
 }
-
 
 func checkHorizontalRowLeft(row []string, startIndexX int, indexY int, alreadyVisitedCells [500][500]bool) (string, [500][500]bool) {
 	var wholeNumber string
@@ -52,7 +51,7 @@ func checkHorizontalRowRight(row []string, startIndexX int, indexY int, alreadyV
 	return wholeNumber, alreadyVisitedCells
 }
 
-func getLeftNumber(row []string, index int, indexY int, alreadyVisitedCells [500][500]bool) (string, [500][500]bool){
+func getLeftNumber(row []string, index int, indexY int, alreadyVisitedCells [500][500]bool) (string, [500][500]bool) {
 	number := row[index]
 	// check behind
 	for i := index - 1; i >= 0; i-- {
@@ -69,7 +68,7 @@ func getLeftNumber(row []string, index int, indexY int, alreadyVisitedCells [500
 	return number, alreadyVisitedCells
 }
 
-func getRightNumber(row []string, index int, indexY int, alreadyVisitedCells [500][500]bool) (string, [500][500]bool){
+func getRightNumber(row []string, index int, indexY int, alreadyVisitedCells [500][500]bool) (string, [500][500]bool) {
 	number := row[index]
 	// check ahead
 	for i := index + 1; i < len(row); i++ {
@@ -86,9 +85,7 @@ func getRightNumber(row []string, index int, indexY int, alreadyVisitedCells [50
 	return number, alreadyVisitedCells
 }
 
-
-
-func getNumber(row []string, index int, indexY int, alreadyVisitedCells [500][500]bool) (string, [500][500]bool){
+func getNumber(row []string, index int, indexY int, alreadyVisitedCells [500][500]bool) (string, [500][500]bool) {
 	number := row[index]
 	// check behind
 	for i := index - 1; i >= 0; i-- {
@@ -111,7 +108,6 @@ func getNumber(row []string, index int, indexY int, alreadyVisitedCells [500][50
 	return number, alreadyVisitedCells
 
 }
-
 
 func partOne(splitLine [][]string) [][]string {
 	numbers := make([][]string, 0)
@@ -121,12 +117,12 @@ func partOne(splitLine [][]string) [][]string {
 			if isSymbol(character) {
 				numbersForGivenSymbol := make([]string, 0)
 				aboveRow := make([]string, 0)
-				aboveRow, alreadyVisitedCells = checkVerticalRow(splitLine[i - 1], j-1, i - 1, alreadyVisitedCells)
+				aboveRow, alreadyVisitedCells = checkVerticalRow(splitLine[i-1], j-1, i-1, alreadyVisitedCells)
 				for _, num := range aboveRow {
 					numbersForGivenSymbol = append(numbersForGivenSymbol, num)
 				}
 				belowRow := make([]string, 0)
-				belowRow, alreadyVisitedCells = checkVerticalRow(splitLine[i + 1], j-1, i + 1, alreadyVisitedCells)
+				belowRow, alreadyVisitedCells = checkVerticalRow(splitLine[i+1], j-1, i+1, alreadyVisitedCells)
 				for _, num := range belowRow {
 					numbersForGivenSymbol = append(numbersForGivenSymbol, num)
 				}
@@ -137,9 +133,9 @@ func partOne(splitLine [][]string) [][]string {
 				var rightNumber string
 				rightNumber, alreadyVisitedCells = checkHorizontalRowRight(splitLine[i], j+1, i, alreadyVisitedCells)
 				numbersForGivenSymbol = append(numbersForGivenSymbol, rightNumber)
-				
+
 				numbersWithoutEmptyStrings := make([]string, 0)
-				
+
 				for _, num := range numbersForGivenSymbol {
 					if num != "" {
 						numbersWithoutEmptyStrings = append(numbersWithoutEmptyStrings, num)
@@ -169,20 +165,20 @@ func main() {
 	numbers := partOne(arrayOfArrays)
 	for _, numbersList := range numbers {
 		if len(numbersList) > 0 {
-		product := 1
-		for _, number := range numbersList {
-			numberInt, _ := strconv.Atoi(number)
-			product *= numberInt
+			product := 1
+			for _, number := range numbersList {
+				numberInt, _ := strconv.Atoi(number)
+				product *= numberInt
+			}
+			result += product
 		}
-		result += product
-	}
 
 	}
 	fmt.Println(result)
 	// result := 0
 	// for _, number := range numbers {
-	// 	convertedNumber, _ := strconv.Atoi(number) 
-	// 	result += convertedNumber 
+	// 	convertedNumber, _ := strconv.Atoi(number)
+	// 	result += convertedNumber
 	// }
 	// fmt.Println(result)
 }

@@ -8,9 +8,9 @@ import (
 )
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
 func partTwo(myNumbers []string, winningNumbers []string) int {
@@ -25,7 +25,6 @@ func partTwo(myNumbers []string, winningNumbers []string) int {
 	return numberOfWinningNumbers
 }
 
-
 func partOne(myNumbers []string, winningNumbers []string) int {
 	numberOfWinningNumbers := 0
 	for _, myNumber := range myNumbers {
@@ -38,11 +37,10 @@ func partOne(myNumbers []string, winningNumbers []string) int {
 	if numberOfWinningNumbers == 1 {
 		return numberOfWinningNumbers
 	} else {
-		return int(math.Pow(2, float64(numberOfWinningNumbers - 1)))
+		return int(math.Pow(2, float64(numberOfWinningNumbers-1)))
 	}
 	return numberOfWinningNumbers
 }
-
 
 func main() {
 	dat, err := os.ReadFile("input.txt")

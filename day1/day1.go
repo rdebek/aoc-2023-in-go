@@ -8,12 +8,12 @@ import (
 )
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
-func replaceStringNumbersWithActualNumbers(line string) string{
+func replaceStringNumbersWithActualNumbers(line string) string {
 	digitMapping := map[string]string{"one": "one1one", "two": "two2two", "three": "three3three", "four": "four4four", "five": "five5five", "six": "six6six", "seven": "seven7seven", "eight": "eight8eight", "nine": "nine9nine"}
 	for k, v := range digitMapping {
 		line = strings.Replace(line, k, v, -1)
@@ -21,8 +21,8 @@ func replaceStringNumbersWithActualNumbers(line string) string{
 	return line
 }
 
-func getCombinedNumber(numbers []string) int{
-	combinedNumber, _ := strconv.Atoi(numbers[0] + numbers[len(numbers) - 1])
+func getCombinedNumber(numbers []string) int {
+	combinedNumber, _ := strconv.Atoi(numbers[0] + numbers[len(numbers)-1])
 	return combinedNumber
 }
 
@@ -36,7 +36,7 @@ func main() {
 		var numbers []string
 		for _, character := range line {
 			if _, err := strconv.Atoi(string(character)); err == nil {
-				numbers = append(numbers, string(character));
+				numbers = append(numbers, string(character))
 			}
 		}
 		NumbersSumForRow := getCombinedNumber(numbers)

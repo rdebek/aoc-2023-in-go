@@ -9,9 +9,9 @@ import (
 )
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
 func extractColor(line string, color string) []string {
@@ -24,7 +24,7 @@ func extractColor(line string, color string) []string {
 	return digits
 }
 
-func isGameValid(line string) bool{
+func isGameValid(line string) bool {
 	maxNumberOfColors := map[string]int{"red": 12, "green": 13, "blue": 14}
 	for color, maxOccurrances := range maxNumberOfColors {
 		matches := extractColor(line, color)
@@ -41,7 +41,7 @@ func getMax(matches []string) int {
 	max := -1
 	for _, match := range matches {
 		matchInt, _ := strconv.Atoi(match)
-		if max == -1 || matchInt > max{
+		if max == -1 || matchInt > max {
 			max = matchInt
 		}
 	}
