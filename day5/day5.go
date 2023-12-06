@@ -13,14 +13,14 @@ func check(e error) {
 	}
 }
 
-func partOne(seeds []string, mappings [][][]int) int{
+func partOne(seeds []string, mappings [][][]int) int {
 	currentLowestLocation := -1
 	for _, seed := range seeds {
 		seed = strings.TrimSpace(seed)
 		seed, _ := strconv.Atoi(seed)
 		for _, mapping := range mappings {
 			for _, innerMapping := range mapping {
-				if seed >= innerMapping[1] && seed < innerMapping[1] + innerMapping[2] {
+				if seed >= innerMapping[1] && seed < innerMapping[1]+innerMapping[2] {
 					seed = seed + (innerMapping[0] - innerMapping[1])
 					break
 				}
@@ -30,20 +30,20 @@ func partOne(seeds []string, mappings [][][]int) int{
 		if currentLowestLocation == -1 || seed < currentLowestLocation {
 			currentLowestLocation = seed
 		}
-}
+	}
 	return currentLowestLocation
 }
 
-func partTwo(seeds []string, mappings [][][]int) int{
+func partTwo(seeds []string, mappings [][][]int) int {
 	currentLowestLocation := -1
 	for i := 0; i < len(seeds); i += 2 {
 		initialSeed, _ := strconv.Atoi(strings.TrimSpace(seeds[i]))
-		numberOfSeeds, _ := strconv.Atoi(strings.TrimSpace(seeds[i + 1]))
-		for seed := initialSeed; seed < initialSeed + numberOfSeeds; seed++ {
+		numberOfSeeds, _ := strconv.Atoi(strings.TrimSpace(seeds[i+1]))
+		for seed := initialSeed; seed < initialSeed+numberOfSeeds; seed++ {
 			newSeed := seed
 			for _, mapping := range mappings {
 				for _, innerMapping := range mapping {
-					if newSeed >= innerMapping[1] && newSeed < innerMapping[1] + innerMapping[2] {
+					if newSeed >= innerMapping[1] && newSeed < innerMapping[1]+innerMapping[2] {
 						newSeed = newSeed + (innerMapping[0] - innerMapping[1])
 						break
 					}
@@ -57,7 +57,6 @@ func partTwo(seeds []string, mappings [][][]int) int{
 
 	return currentLowestLocation
 }
-
 
 func makeMappingFromLine(line string) []int {
 	listOfDigits := strings.Split(line, " ")
@@ -84,7 +83,7 @@ func main() {
 					mappings = append(mappings, mapping)
 					break
 				}
-				newMapping := makeMappingFromLine(splitData[j][:len(splitData[j]) - 1])
+				newMapping := makeMappingFromLine(splitData[j][:len(splitData[j])-1])
 				mapping = append(mapping, newMapping)
 			}
 		}

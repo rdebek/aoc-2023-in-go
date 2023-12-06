@@ -13,13 +13,13 @@ func check(e error) {
 	}
 }
 
-func partOne(times []string, distances []string) int{
+func partOne(times []string, distances []string) int {
 	results := make([]int, 0)
-	for i:= 0; i < len(times); i++ {
+	for i := 0; i < len(times); i++ {
 		numberOfWaysToBeatTheRecord := 0
 		time, _ := strconv.Atoi(times[i])
 		distance, _ := strconv.Atoi(distances[i])
-		for j := 1; j < time; j ++ {
+		for j := 1; j < time; j++ {
 			remainingTime := time - j
 			distanceTravelled := j * remainingTime
 			if distanceTravelled > distance {
@@ -35,11 +35,11 @@ func partOne(times []string, distances []string) int{
 	return finalResult
 }
 
-func partTwo(time string, distance string) int{
+func partTwo(time string, distance string) int {
 	timeInt, _ := strconv.Atoi(time)
 	distanceInt, _ := strconv.Atoi(distance)
 	numberOfWaysToBeatTheRecord := 0
-	for j := 1; j < timeInt; j ++ {
+	for j := 1; j < timeInt; j++ {
 		remainingTime := timeInt - j
 		distanceTravelled := j * remainingTime
 		if distanceTravelled > distanceInt {
@@ -48,7 +48,6 @@ func partTwo(time string, distance string) int{
 	}
 	return numberOfWaysToBeatTheRecord
 }
-
 
 func main() {
 	dat, err := os.ReadFile("input.txt")
